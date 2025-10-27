@@ -1,1 +1,22 @@
-spring.application.name=SalasChat
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/chatseguro
+    username: postgres
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  sql:
+    init:
+      mode: always
+
+jwt:
+  secret: 03BrBSuBAKKmJJWDXkNIncr/hm3PRHK6yk2xYJHB0EceZc61v2+cylvbHkAUwUB9GNUxQx15iQxJJlnsr6HCSg==
+  expiration-ms: 3600000
