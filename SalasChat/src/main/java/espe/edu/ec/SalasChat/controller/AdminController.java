@@ -23,6 +23,7 @@ public class AdminController {
     public ResponseEntity<Sala> crearSala(@RequestBody Map<String, String> body){
         Sala sala = new  Sala();
         sala.setNombre(body.get("nombre"));
+        sala.setTipo(body.get("tipo"));
         sala.setPinHash(encoder.encode(body.get("pin")));
         Sala guardada = salaRepository.save(sala);
         return ResponseEntity.ok(guardada);

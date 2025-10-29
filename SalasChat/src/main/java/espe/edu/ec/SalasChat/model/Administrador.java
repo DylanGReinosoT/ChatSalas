@@ -23,3 +23,4 @@ public class Administrador {
 
     private String role = "ADMIN";
 }
+

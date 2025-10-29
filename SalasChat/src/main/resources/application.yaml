@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/chatseguro
+    url: jdbc:postgresql://localhost:5433/chatseguro
     username: postgres
     password: admin
   jpa:

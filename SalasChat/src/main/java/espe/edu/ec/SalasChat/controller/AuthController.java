@@ -23,11 +23,24 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> cred) {
-        var admin = repository.findByUsername(cred.get("<username")).orElse(null);
-        if (admin == null || !encoder.matches(cred.get("password"), admin.getPassword())){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credneciales invalidas");
+        System.out.println("Intento de login: " + cred);
+
+        var admin = repository.findByUsername(cred.get("username")).orElse(null);
+        if (admin == null) {
+            System.out.println("❌ Usuario no encontrado");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario no encontrado");
         }
+
+        System.out.println("Usuario encontrado: " + admin.getUsername());
+        System.out.println("Hash en BD: " + admin.getPassword());
+        System.out.println("Coinciden?: " + encoder.matches(cred.get("password"), admin.getPassword()));
+
+        if (!encoder.matches(cred.get("password"), admin.getPassword())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
+        }
+
         String token = jwtUtil.generateToken(admin.getUsername());
         return ResponseEntity.ok(Map.of("token", token));
     }
+
 }
