@@ -1,6 +1,6 @@
 package espe.edu.ec.SalasChat.controller;
 
-import espe.edu.ec.SalasChat.service.AuthService;
+import espe.edu.ec.SalasChat.service.UserAuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,20 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/auth/admin")
+@RequestMapping("auth/user")
 @RequiredArgsConstructor
-public class AuthController {
-    private final AuthService authService;
+public class UserAuthController {
+
+    private final UserAuthService userAuthService;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody Map<String, String> body) {
-        return authService.register(body);
+        return userAuthService.register(body);
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> cred) {
-        return authService.login(cred);
+        return userAuthService.login(cred);
     }
-
-
 }
